@@ -23,7 +23,7 @@ class ServiceInfoPgRepository {
 
     await client.end();
 
-    const id = result.rows[0].id;
+    const id = result.rows[0].service_info_id;
 
     return await this.findById(id);
   }

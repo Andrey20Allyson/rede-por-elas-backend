@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const { pgConnect } = require("../helpers/postgres");
 const { ServiceCategoryRoutes } = require("./service-category.routes");
+const { ServiceInfoRoutes } = require("./service-info.routes");
 
 const rootRouter = Router();
 
@@ -14,6 +15,11 @@ rootRouter.use(
   ServiceCategoryRoutes.INSTANCE.BASE_PATH,
   ServiceCategoryRoutes.INSTANCE.router,
 );
+
+rootRouter.use(
+  ServiceInfoRoutes.INSTANCE.BASE_PATH,
+  ServiceInfoRoutes.INSTANCE.router,
+)
 
 module.exports = rootRouter;
 

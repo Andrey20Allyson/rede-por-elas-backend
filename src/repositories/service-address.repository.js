@@ -22,8 +22,6 @@ class ServiceAddressPgRepository {
     );
 
     await client.end();
-    
-    const categoryResult = await client.query(``)
 
     const row = result.rows[0];
 

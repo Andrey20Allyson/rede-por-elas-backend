@@ -1,12 +1,13 @@
 const { ServiceAddress } = require("../domains/service-address");
 const { ServiceInfoFilters, ServiceInfo, CreateServiceInfoDTO, GetServiceInfoDTO } = require("../domains/service-info");
 const { ServiceAddressTransformer } = require("./service-address.transformer");
+const { ServiceCategoryTransformer } = require("./service-category.transformer");
 
 class ServiceInfoTransformer {
   static INSTANCE = new ServiceInfoTransformer();
 
   addressTransformer = ServiceAddressTransformer.INSTANCE;
-  categoryTransformer = ServiceAddressTransformer.INSTANCE;
+  categoryTransformer = ServiceCategoryTransformer.INSTANCE;
 
   /**
    * 

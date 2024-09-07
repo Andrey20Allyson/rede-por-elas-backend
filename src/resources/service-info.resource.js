@@ -32,9 +32,12 @@ class ServiceInfoResource {
     const serviceToCreate = this.transformer.creationDTOToEntity(serviceDTO);
 
     const createdService = await this.serviceRepository.create(serviceToCreate);
-    const createdAddress = await this.addressRepository.create(serviceToCreate.address);
-
-    createdService.address = createdAddress;
+    
+    if (serviceToCreate.address != null) {
+      const createdAddress = await this.addressRepository.create(serviceToCreate.address);
+  
+      createdService.address = createdAddress;
+    }
 
     const responseServiceDTO = this.transformer.entityToDTO(createdService);
 
