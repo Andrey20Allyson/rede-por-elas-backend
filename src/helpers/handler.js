@@ -1,15 +1,17 @@
 const { serverError } = require("./responses");
 
-async function handleResource(resource, method, res, ...params) {
-  let out;
+function handleResource(resource, method, paramsReducer = () => []) {
+  return async (req, res) => {
+    let out;
+    
+    try {
+      out = await resource[method](...paramsReducer(req));
+    } catch (err) {
+      out = serverError();
+    }
   
-  try {
-    out = await resource[method](...params);
-  } catch (err) {
-    out = serverError();
+    res.status(out.status).send(out.body);
   }
-
-  res.status(out.status).send(out.body);
 }
 
 module.exports = { handleResource };

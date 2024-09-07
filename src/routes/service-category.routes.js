@@ -18,9 +18,9 @@ class ServiceCategoryRoutes {
     this.resource = resource;
     this.serviceInfoRoutes = serviceInfoRoutes;
     
-    this.router.get('/', (_, res) => handleResource(this.resource, 'list', res));
+    this.router.get('/', handleResource(this.resource, 'list'));
 
-    this.router.post('/', (req, res) => handleResource(this.resource, 'create', res, req.body));
+    this.router.post('/', handleResource(this.resource, 'create', req => [req.body]));
 
     this.router.use('/:category_id/', this.serviceInfoRoutes.router);
   }
