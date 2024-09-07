@@ -35,10 +35,10 @@ class ServiceInfoPgRepository {
     SELECT 
       s.*,
       c.name AS category_name,
-      a.city AS address_city
-      a.neighborhood AS address_neighborhood
-      a.street AS address_street
-      a.number AS address_number
+      a.city AS address_city,
+      a.neighborhood AS address_neighborhood,
+      a.street AS address_street,
+      a.number AS address_number,
       a.complement AS address_complement
     FROM service_info s
     LEFT JOIN service_category c
