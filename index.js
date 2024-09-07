@@ -1,29 +1,18 @@
-const { Client } = require('pg');
-const dotenv = require('dotenv');
-const e = require('express');
+require('dotenv').config();
 
-dotenv.config();
+const e = require('express');
+const cors = require('cors');
+const rootRouter = require('./src/routes');
 
 const PORT = process.env.PORT ?? 4040;
 
 const app = e();
 
-app.get('/', async (req, res) => {
-  res.json({
-    message: await getNow(),
-  });
-})
+app.use(cors());
+app.use(e.json());
 
-app.listen(PORT);
+app.use(rootRouter);
 
-async function getNow() {
-  const client = new Client(process.env.DATABASE_URL);
-
-  await client.connect();
-
-  const result = await client.query('SELECT NOW()');
-
-  await client.end();
-
-  return result.rows;
-}
+app.listen(PORT, () => {
+  console.log(`listening port ${PORT}`);
+});
