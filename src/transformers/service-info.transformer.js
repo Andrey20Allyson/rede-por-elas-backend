@@ -6,6 +6,7 @@ class ServiceInfoTransformer {
   static INSTANCE = new ServiceInfoTransformer();
 
   addressTransformer = ServiceAddressTransformer.INSTANCE;
+  categoryTransformer = ServiceAddressTransformer.INSTANCE;
 
   /**
    * 
@@ -19,7 +20,7 @@ class ServiceInfoTransformer {
     entity.description = dto.description;
     entity.href = dto.href;
     entity.phone = dto.phone;
-    
+
     if (dto.address != null) {
       entity.address = this.addressTransformer.creationDTOTOEntity(dto.address);
     }
@@ -52,7 +53,7 @@ class ServiceInfoTransformer {
       entity.category.id = row.category_id;
       entity.category.name = row.category_name;
     }
-    
+
     if (row.address_id != null) {
       const address = new ServiceAddress();
 
@@ -62,7 +63,7 @@ class ServiceInfoTransformer {
       address.neighborhood = row.address_neighborhood
       address.number = row.address_number
       address.street = row.address_street
-    
+
       entity.address = address;
     }
 
@@ -77,7 +78,16 @@ class ServiceInfoTransformer {
     const dto = new GetServiceInfoDTO();
 
     dto.id = entity.id;
-    dto.category
+    dto.name = entity.name;
+    dto.description = entity.description;
+    dto.href = entity.href;
+    dto.phone = entity.phone;
+
+    dto.category = this.categoryTransformer.entityToDTO(entity.category);
+
+    if (entity.address != null) {
+      dto.address = this.addressTransformer.entityToDTO(entity.address);
+    }
 
     return dto;
   }

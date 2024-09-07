@@ -40,6 +40,12 @@ class ServiceAddressTransformer {
   entityToDTO(entity) {
     const dto = new GetServiceAddressDTO();
 
+    dto.city = entity.city;
+    dto.neighborhood = entity.neighborhood;
+    dto.street = entity.street;
+    dto.number = entity.number;
+    dto.complement = entity.complement;
+
     return dto;
   }
 }
