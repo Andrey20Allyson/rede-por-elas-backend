@@ -7,6 +7,7 @@ function handleResource(resource, method, paramsReducer = () => []) {
     try {
       out = await resource[method](...paramsReducer(req));
     } catch (err) {
+      console.log(err);
       out = serverError();
     }
   

@@ -22,7 +22,7 @@ class ServiceCategoryRoutes {
 
     this.router.post('/', handleResource(this.resource, 'create', req => [req.body]));
 
-    this.router.use('/:category_id/', this.serviceInfoRoutes.router);
+    this.router.use('/:category_id' + this.serviceInfoRoutes.BASE_PATH, this.serviceInfoRoutes.router);
   }
 }
 
